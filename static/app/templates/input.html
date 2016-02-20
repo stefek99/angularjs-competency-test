@@ -1,53 +1,63 @@
-<div class="container">
-  <h1>Some Useful Government Service</h1>
+<h1>Some Useful Government Service</h1>
 
-  <form class="form-horizontal" name="person" ng-submit="submitForm()">
+<form class="form-horizontal" name="personForm" ng-submit="submitForm()" novalidate>
 
-    <div class="form-group">
-      <label for="name" class="col-xs-2 control-label">Name</label>
-      <div class="col-xs-10">
-        <input class="form-control" id="name" ng-model="name">
-      </div>
+  <div class="form-group">
+    <label for="name" class="col-xs-2 control-label">Name</label>
+    <div class="col-xs-10">
+      <input class="form-control" name="name" id="name" ng-model="name" required>
+      <span ng-show="personForm.name.$invalid && !personForm.name.$pristine" class="help-block">Name is required.</span>
     </div>
+  </div>
 
-    <div class="form-group">
-      <div class="col-xs-2 control-label">Sex</div>
-      <div class="col-xs-10">
-        <label>
-          <input type="radio" ng-model="sex" value="Male">
-          Male
-        </label>
+  <div class="form-group">
+    <div class="col-xs-2 control-label">Sex</div>
+    <div class="col-xs-10">
+      <label>
+        <input type="radio" ng-model="sex" value="Male" required>
+        Male
+      </label>
 
-        <label>
-          <input type="radio" ng-model="sex" value="Female">
-          Female
-        </label>
-      </div>
+      <label>
+        <input type="radio" ng-model="sex" value="Female" required>
+        Female
+      </label>
+
+      <span ng-show="personForm.sex.$invalid && !personForm.sex.$pristine" class="help-block">Sex is required.</span>
+
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="age" class="col-xs-2 control-label">Age</label>
-      <div class="col-xs-10">
-        <input class="form-control" type="number" min="1" max="125" id="age" ng-model="age">
-      </div>
+  <div class="form-group">
+    <label for="age" class="col-xs-2 control-label">Age</label>
+    <div class="col-xs-10">
+      <input class="form-control" name="age" type="number" min="1" max="125" id="age" ng-model="age">
+
+      <span ng-show="personForm.age.$invalid && !personForm.age.$pristine" class="help-block">Age is required.</span>
+      <span ng-show="personForm.age.$error.required">Age is required.</span>
+      <span ng-show="personForm.age.$error.min" class="help-block">Age should be at least 1.</span>
+      <span ng-show="personForm.age.$error.max" class="help-block">Age should be less than 126.</span>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="country" class="col-xs-2 control-label">Country</label>
-      <div class="col-xs-10">
+  <div class="form-group">
+    <label for="country" class="col-xs-2 control-label">Country</label>
+    <div class="col-xs-10">
 
-        <select ng-model="country">
-          <option value="">Choose Country</option>
-          <option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
-        </select>
+      <select ng-model="country" name="country" required>
+        <option value="">Choose Country</option>
+        <option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+      </select>
 
-      </div>
+      <span ng-show="personForm.country.$invalid && !personForm.country.$pristine" class="help-block">Country is required.</span>
+
     </div>
+  </div>
 
-    <div class="form-group">
-      <div class="col-xs-12">
-        <button type="submit" class="btn btn-default">Apply</button>
-      </div>
+  <div class="form-group">
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-default" ng-disabled="personForm.$invalid">Apply</button>
+      <span ng-show="personForm.$invalid" class="help-block">Please complete all the fields properly.</span>
     </div>
-  </form>
-</div>
+  </div>
+</form>

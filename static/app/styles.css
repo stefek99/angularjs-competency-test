@@ -3,5 +3,5 @@
 }
 
 .form-group {
-  height: 35px;
+  height: 70px; /* when the validation messages kicks in - avoiding the jump - setting enough height */
 }

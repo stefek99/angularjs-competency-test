@@ -1,4 +1,4 @@
-app.controller("InputController", function($scope, countries) {
+app.controller("InputController", function($scope, $location, countries) {
 
   $scope.countries = countries.data;
 
@@ -11,6 +11,8 @@ app.controller("InputController", function($scope, countries) {
     };
 
     console.log(data);
+
+    $location.path('/thankyou/').search({name: $scope.name});
   }
 
 });
