@@ -1,8 +1,8 @@
-app.service("countries", function() {
+app.service("CountriesService", function($http) {
   var service = {};
 
   service.get = function() {
-    return [1,2,3];
+    return $http.get("https://restcountries.eu/rest/v1/region/Europe");
   };
 
   return service;

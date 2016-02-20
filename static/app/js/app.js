@@ -4,7 +4,12 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: "templates/input.html",
-      controller: "InputController"
+      controller: "InputController",
+      resolve: {
+        countries: function(CountriesService) {
+          return CountriesService.get();
+        }
+      }
     })
     .when('/thankyou', {
       templateUrl: "templates/thankyou.html"
