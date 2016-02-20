@@ -1,3 +1,3 @@
-app.controller("InputController", function($scope) {
-	
+app.controller("InputController", function($scope, countries) {
+  $scope.countries = countries.get();
 });

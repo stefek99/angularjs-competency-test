@@ -1,1 +1,41 @@
-Gov
+<div class="container">
+  <h1>Some Useful Government Service</h1>
+
+  <form class="form-horizontal" ng-submit="submitForm()">
+
+    <div class="form-group">
+      <label for="name" class="col-xs-2 control-label">Name</label>
+      <div class="col-xs-10">
+        <input class="form-control" id="name" ng-model="name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-2 control-label">Sex</div>
+      <div class="col-xs-10">
+        <label>
+          <input type="radio" ng-model="sex" value="Male">
+          Male
+        </label>
+
+        <label>
+          <input type="radio" ng-model="sex" value="Female">
+          Female
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="age" class="col-xs-2 control-label">Age</label>
+      <div class="col-xs-10">
+        <input class="form-control" type="number" min="1" max="125" id="age" ng-model="age">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <button type="submit" class="btn btn-default">Apply</button>
+      </div>
+    </div>
+  </form>
+</div>

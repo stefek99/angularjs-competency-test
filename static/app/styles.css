@@ -1,13 +1,7 @@
-.cf:before,
-.cf:after {
-    content: " ";
-    display: table;
+.control-label {
+  font-weight: bold;
 }
 
-.cf:after {
-    clear: both;
-}
-
-body {
-	font-family: Sans-Serif;
+.form-group {
+  height: 35px;
 }
