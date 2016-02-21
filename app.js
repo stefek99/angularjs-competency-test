@@ -1,15 +1,27 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
 
 var app = express();
 app.set('port', (process.env.PORT || 3000)); // required for heroku
 app.use(express.static(path.join(__dirname, 'static/app')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+})); 
 
 app.listen(app.get('port'), function() {
   console.log("server started: http://localhost:" + app.get('port'));
 });
 
+app.post("/api/user", function(req, res) {
+  var data = req.body;
+  console.log(data);
+
+  res.send(data);
+});
+/*
 mongoose.connect('mongodb://localhost/angulartest');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -43,3 +55,4 @@ user.save(function (err) {
   
   console.log("saved!");
 });
+*/

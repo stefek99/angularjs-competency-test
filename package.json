@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "4.12.3",
+    "body-parser": "1.15.0",
     "mongoose": "4.4.4"
   }
 }
