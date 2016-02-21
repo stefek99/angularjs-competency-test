@@ -12,7 +12,8 @@ app.config(['$routeProvider', function($routeProvider) {
       }
     })
     .when('/thankyou', {
-      templateUrl: "templates/thankyou.html"
+      templateUrl: "templates/thankYou.html",
+      controller: "ThankYouController"
     })
     .otherwise({redirectTo: '/'});
 }]);
