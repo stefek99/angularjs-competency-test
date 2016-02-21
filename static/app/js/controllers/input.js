@@ -3,7 +3,7 @@ app.controller("InputController", function($scope, $location, countries, Backend
   $scope.countries = countries.data;
 
   $scope.name = "M"
-  $scope.sex = "male"
+  $scope.sex = "Male"
   $scope.age = 12
   $scope.country = "Albania"
 
@@ -15,10 +15,12 @@ app.controller("InputController", function($scope, $location, countries, Backend
       country : $scope.country
     };
 
+    console.log(userData);
+
     BackendService.save(userData).then(function(response) {
       $location.path('/thankyou/').search({name: $scope.name});
-    }, function() {
-      alert("Some error eccured");
+    }, function(response) {
+      alert(response); // TOOD: better handling of the error message // $http interceptors potentially
     });
   }
 

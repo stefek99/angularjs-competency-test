@@ -17,7 +17,3 @@ app.config(['$routeProvider', function($routeProvider) {
     })
     .otherwise({redirectTo: '/'});
 }]);
-
-app.controller("ctrl", function($scope, $http, $location) {
-
-});
