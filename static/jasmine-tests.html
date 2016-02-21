@@ -1,0 +1,95 @@
+<!--
+  I'm no good with setting up infrastructure from scratch
+  Usually using ready to go examples that just work (either from tutorials or documentation)
+  In this instance using the code from: http://jsfiddle.net/25g06zbb/3/
+-->
+
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.1/jasmine.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.1/jasmine-html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.1/boot.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.9/angular.js"></script>
+    <script src="https://code.angularjs.org/1.4.9/angular-mocks.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.2.1/jasmine.min.css">
+
+    <script src="app/js/app.js"></script>
+    <script src="app/js/services/countries.js"></script>
+  </head>
+  <body>
+
+    <script>
+    describe("jasmine", function () {
+      it("sanity check", function () {
+        expect(true).toBe(true);
+      });
+    });
+
+    describe("countries service (mocked)", function () {
+      var CountriesService, $httpBackend;
+
+      beforeEach(function() {
+        module("app");
+      });
+
+      beforeEach(inject(function (_$httpBackend_, _CountriesService_) {
+        $httpBackend = _$httpBackend_;
+        CountriesService = _CountriesService_;
+      }));
+
+      afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+      });
+
+      it("is registered with the module", function() {
+        expect(CountriesService).not.toBeNull();
+      });
+
+      it("is making call to the correct URL", function(){
+        var url = "https://restcountries.eu/rest/v1/region/Europe"
+        $httpBackend.expectGET(url).respond(200);
+        CountriesService.get(); // not doing anything with response as it is mocked anyway
+        expect($httpBackend.flush).not.toThrow();
+      })
+    });
+
+    describe("countries service (actual)", function () {
+      var CountriesService;
+
+      beforeEach(function () {
+        var injector = angular.injector(["ng"]);
+        var $rootScope = injector.get("$rootScope");
+        var $http = injector.get("$http");
+        
+        module("app", function ($provide) {
+          $provide.value("$http", $http); 
+          $provide.value("$rootScope", $rootScope);
+        });
+      });
+
+      beforeEach(inject(function (_CountriesService_) {
+        CountriesService = _CountriesService_;
+      }));
+
+      it("is registered with the module", function () {
+        expect(CountriesService).not.toBeNull();
+      });
+
+      it("is receiving data from the endpoint", function (done) {
+        CountriesService.get().then(function(response) {
+          expect(response.data.length).toBeGreaterThan(0);
+          done();
+        }, function(response) {
+          expect(false).toBe(true); // ensuring test will fail
+          done();
+        })
+      });
+    });
+
+    </script>
+
+
+  </body>
+</html>
