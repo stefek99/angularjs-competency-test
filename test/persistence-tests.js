@@ -16,7 +16,7 @@ describe("database persistence", function() {
     });
   });
 
-  it("after saving the user it should increase number of items in the collection", function() {
+  it("it should increase number of items in the collection after inserting the user", function() {
     var userId, count1, count2;
 
     userdata.count()
@@ -37,6 +37,20 @@ describe("database persistence", function() {
         return userdata.count();
       }).then(function(count) {
         assert.equal(count1, count);
+      })
+  });
+
+  it("it should persist the user with the correct data", function() {
+    userdata.save(user)
+      .then(function(userObject) {
+        return userdata.get(userObject._id);
+      })
+      .then(function(userObject) {
+        assert.equal(user.name, userObject.name);
+        assert.equal(user.sex, userObject.sex);
+        assert.equal(user.age, userObject.age);
+        assert.equal(user.country, userObject.country);
+        return userdata.remove(userObject._id); // need to clean
       })
   });
 });

@@ -70,8 +70,6 @@ var remove = function(id) {
 var get = function(id) {
   var defer = q.defer();
 
-  console.log("getting by id: " + id);
-
   User.findOne({ _id: id }, function(err, user) {
     if (err) {
       defer.reject(err);
