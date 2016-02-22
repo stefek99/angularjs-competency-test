@@ -1,24 +1,24 @@
-<h1>Some Useful Government Service</h1>
+<h1 class="input">Some Useful Government Service</h1>
 
 <form class="form-horizontal" name="personForm" ng-submit="submitForm()" novalidate>
 
   <div class="form-group">
-    <label for="name" class="col-xs-2 control-label">Name</label>
-    <div class="col-xs-10">
+    <label for="name" class="col-xs-2 col-md-1 control-label">Name</label>
+    <div class="col-xs-10 col-md-11">
       <input class="form-control" name="name" id="name" ng-model="name" required>
       <span ng-show="personForm.name.$invalid && !personForm.name.$pristine" class="help-block">Name is required.</span>
     </div>
   </div>
 
   <div class="form-group">
-    <div class="col-xs-2 control-label">Sex</div>
-    <div class="col-xs-10">
-      <label>
+    <div class="col-xs-2 col-md-1 control-label">Sex</div>
+    <div class="col-xs-10 col-md-11">
+      <label class="sex">
         <input type="radio" ng-model="sex" value="Male" required>
         Male
       </label>
 
-      <label>
+      <label class="sex">
         <input type="radio" ng-model="sex" value="Female" required>
         Female
       </label>
@@ -29,8 +29,8 @@
   </div>
 
   <div class="form-group">
-    <label for="age" class="col-xs-2 control-label">Age</label>
-    <div class="col-xs-10">
+    <label for="age" class="col-xs-2 col-md-1 control-label">Age</label>
+    <div class="col-xs-10 col-md-11">
       <input class="form-control" name="age" type="number" min="1" max="125" id="age" ng-model="age">
 
       <span ng-show="personForm.age.$invalid && !personForm.age.$pristine" class="help-block">Age is required.</span>
@@ -41,8 +41,8 @@
   </div>
 
   <div class="form-group">
-    <label for="country" class="col-xs-2 control-label">Country</label>
-    <div class="col-xs-10">
+    <label for="country" class="col-xs-2 col-md-1 control-label">Country</label>
+    <div class="col-xs-10 col-md-11">
 
       <select ng-model="country" name="country" required>
         <option value="">Choose Country</option>
@@ -55,7 +55,7 @@
   </div>
 
   <div class="form-group">
-    <div class="col-xs-12">
+    <div class="col-xs-2 col-md-1 control-label">
       <button type="submit" class="btn btn-default" ng-disabled="personForm.$invalid">Apply</button>
       <span ng-show="personForm.$invalid" class="help-block">Please complete all the fields properly.</span>
     </div>

@@ -1,7 +1,11 @@
 var q = require('q');
 var mongoose = require('mongoose');
+var credentials = require("./database-credentials");
 
-mongoose.connect('mongodb://localhost/angulartest'); // for my localhost // TODO: config for deployment
+// TODO: Better of way initialising the detabase (dev, test, production)
+// mongoose.connect('mongodb://localhost/angulartest');
+
+mongoose.connect("mongodb://" + credentials.username + ":" + credentials.password + "@ds055485.mongolab.com:55485/angularjs-competency-test");
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

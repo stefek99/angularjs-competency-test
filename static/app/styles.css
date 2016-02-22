@@ -1,7 +1,19 @@
+h1.input {
+  margin-bottom: 40px;
+}
+
 .control-label {
   font-weight: bold;
 }
 
 .form-group {
-  height: 70px; /* when the validation messages kicks in - avoiding the jump - setting enough height */
+  height: 35px;  /* Keeping all input forms consistent size */
+}
+
+label.sex {
+  padding-top: 7px;
+}
+
+input[type="number"] {
+  width: 100px;
 }
