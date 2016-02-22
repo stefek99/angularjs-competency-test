@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var User = require('./userdata').userSchema; // TODO: potentially stick to a better naming convention (TBD)
+var userdata = require('./userdata'); // TODO: potentially stick to a better naming convention (TBD)
 
 var app = express();
 app.set('port', (process.env.PORT || 3000)); // required for heroku
@@ -16,16 +16,11 @@ app.listen(app.get('port'), function() {
 });
 
 app.post("/api/user", function(req, res) {
-  var userData = req.body;
+  var data = req.body;
 
-  var user = new User(userData);
-
-  user.save(function (err) {
-    if (err) {
-      res.send(error); // TODO: in production don't send error message to the client
-      return console.error(err);
-    }
-    
-    res.send("OK");
+  userdata.save(data).then(function(){
+    res.sendStatus(200);
+  }, function() {
+    res.sendStatus(500);
   });
 });

@@ -20,7 +20,7 @@ app.controller("InputController", function($scope, $location, countries, Backend
     BackendService.save(userData).then(function(response) {
       $location.path('/thankyou/').search({name: $scope.name});
     }, function(response) {
-      alert(response); // TOOD: better handling of the error message // $http interceptors potentially
+      alert("Something on the backend went wrong.");
     });
   }
 

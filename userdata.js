@@ -1,3 +1,4 @@
+var q = require('q');
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/angulartest'); // for my localhost // TODO: config for deployment
@@ -19,9 +20,72 @@ var userSchema = mongoose.Schema(
     collection: 'userdata' 
   }
 );
-
 var User = mongoose.model('userdata', userSchema);
 
+var save = function(userdata) {
+  var defer = q.defer();
+
+  var user = new User(userdata);
+  
+  user.save(function (err, user) {
+    if (err) {
+      defer.reject(err);
+      return;
+    }
+    
+    defer.resolve(user);
+  });
+
+  return defer.promise;
+};
+
+var count = function() {
+  var defer = q.defer();
+
+  User.count({}, function(err, count){
+    if (err) {
+      defer.reject(err);
+      return;
+    }
+
+    defer.resolve(count);
+  })
+  return defer.promise;
+};
+
+var remove = function(id) {
+  var defer = q.defer();
+
+  User.remove({ _id: id }, function(err) {
+    if (err) {
+      defer.reject(err);
+      return;
+    }
+
+    defer.resolve();
+  })
+  return defer.promise;
+};
+
+var get = function(id) {
+  var defer = q.defer();
+
+  console.log("getting by id: " + id);
+
+  User.findOne({ _id: id }, function(err, user) {
+    if (err) {
+      defer.reject(err);
+      return;
+    }
+
+    defer.resolve(user);
+  })
+  return defer.promise;
+};
+
 module.exports = {
-  userSchema : User
+  save : save,
+  count : count,
+  remove : remove,
+  get : get
 };
